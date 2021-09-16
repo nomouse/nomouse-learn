@@ -52,4 +52,12 @@ public class ValidClose {
     public static void main(String[] args) {
         System.out.println(validClose("({}){}"));
     }
+
+    public void test1() {
+
+    }
+
 }
+
+
+

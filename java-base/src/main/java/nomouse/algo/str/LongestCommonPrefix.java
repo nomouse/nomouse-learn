@@ -1,4 +1,4 @@
-package nomouse.algo;
+package nomouse.algo.str;
 
 /**
  * 最长公共前缀
@@ -14,7 +14,7 @@ public class LongestCommonPrefix {
         char curr = 0;
         for (int i = 0; i < 200; i++) {
             for (String str : strArray) {
-                if (str.length() <= i) {
+                if (str == null || str.length() <= i) {
                     return sb.toString();
                 }
                 if (curr == 0) {
