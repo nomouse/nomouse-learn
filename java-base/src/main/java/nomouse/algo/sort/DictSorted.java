@@ -1,4 +1,4 @@
-package nomouse.algo;
+package nomouse.algo.sort;
 
 import java.util.HashMap;
 import java.util.Map;

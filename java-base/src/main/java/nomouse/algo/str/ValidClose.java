@@ -1,4 +1,4 @@
-package nomouse.algo;
+package nomouse.algo.str;
 
 import java.util.HashSet;
 import java.util.Set;

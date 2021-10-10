@@ -7,8 +7,20 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>java-base</artifactId>
     <packaging>jar</packaging>
     <name>java-base</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 </project>
