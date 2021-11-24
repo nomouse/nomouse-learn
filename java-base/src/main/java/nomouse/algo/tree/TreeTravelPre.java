@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Stack;
 
 /**
+ * 前序遍历
+ *
  * @author nomouse
  * @date 2021/9/30
  */
-public class TreeTravel {
+public class TreeTravelPre {
 
     public static List<Integer> preorderIt(TreeNode root) {
         List<Integer> result = new LinkedList<>();

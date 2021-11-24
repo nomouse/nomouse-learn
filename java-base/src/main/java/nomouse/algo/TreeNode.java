@@ -6,7 +6,7 @@ package nomouse.algo;
  */
 public class TreeNode {
 
-    public int val;
+    public Integer val;
 
     public TreeNode left;
 

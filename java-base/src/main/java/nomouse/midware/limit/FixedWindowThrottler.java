@@ -1,4 +1,4 @@
-package nomouse.traffic;
+package nomouse.midware.limit;
 
 import java.util.concurrent.atomic.LongAdder;
 
