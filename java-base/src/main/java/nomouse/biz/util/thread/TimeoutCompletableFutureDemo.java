@@ -1,4 +1,4 @@
-package nomouse.biz.thread;
+package nomouse.biz.util.thread;
 
 
 import com.alibaba.fastjson.JSON;
@@ -15,7 +15,7 @@ import nomouse.biz.util.exception.BizException;
  * @author wuchunhao on 2023/2/22
  */
 @Slf4j
-public class TimeoutCompletableFuture {
+public class TimeoutCompletableFutureDemo {
 
     private static List<String> parallel(List<Long> idList) {
 

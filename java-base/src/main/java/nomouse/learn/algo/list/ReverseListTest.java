@@ -8,6 +8,9 @@ import nomouse.learn.algo.ListNode;
  */
 public class ReverseListTest {
 
+    /**
+     * 头插法
+     */
     public static ListNode reverseH(ListNode head) {
 
         // 输入: 1->2->3->4->5->NULL 输出: 5->4->3->2->1->NULL
@@ -29,6 +32,9 @@ public class ReverseListTest {
         return dummy.next;
     }
 
+    /**
+     * 交换移动法
+     */
     public static ListNode reverseI(ListNode head) {
 
         // 输入: 1->2->3->4->5->NULL 输出: 5->4->3->2->1->NULL
@@ -61,6 +67,14 @@ public class ReverseListTest {
         return last;
     }
 
+
+    private static void print(ListNode node) {
+        while (node != null) {
+            System.out.println(node.val);
+            node = node.next;
+        }
+    }
+
     public static void main(String[] args) {
         ListNode node =
             new ListNode(1,
@@ -69,7 +83,32 @@ public class ReverseListTest {
                         new ListNode(4,
                             new ListNode(5, null)))));
 
-        ListNode reserve = reverseH(node);
-        System.out.println(reserve);
+        ListNode reserve = reverseOne(node);
+        print(reserve);
     }
+
+    /**
+     *    1 2 3 4 5
+     * d  1 2 3 4 5
+     * d  l r
+     *
+     * d  2 1 3 4 5
+     * d    l r
+     *
+     */
+    private static ListNode reverseOne(ListNode node) {
+        ListNode dummy = new ListNode(-1, node);
+
+        ListNode cur = node;
+        while (cur.next != null) {
+            ListNode remove = cur.next;
+            cur.next = remove.next;
+            remove.next = dummy.next;
+            dummy.next = remove;
+        }
+
+        return dummy.next;
+    }
+
+
 }

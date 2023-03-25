@@ -1,4 +1,4 @@
-package nomouse.learn.base;
+package nomouse.learn.base.concurrent;
 
 /**
  * @author nomouse

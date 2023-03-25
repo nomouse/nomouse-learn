@@ -8,7 +8,7 @@ import nomouse.learn.algo.ListNode;
  */
 public class RemoveLinkElement {
 
-    public ListNode remove(ListNode r, int val) {
+    public static ListNode remove(ListNode r, int val) {
         ListNode pre = new ListNode(0, r);
 
         ListNode cur = pre;
@@ -29,10 +29,42 @@ public class RemoveLinkElement {
                 new ListNode(2,
                     new ListNode(3,
                         new ListNode(4,
-                            new ListNode(5, null)))));
+                            new ListNode(3, null)))));
 
-        ListNode reserve = new RemoveLinkElement()
-            .remove(node, 3);
-        System.out.println(reserve);
+        ListNode reserve = removeH(node, 3);
+        print(reserve);
     }
+
+    private static void print(ListNode node) {
+        while (node != null) {
+            System.out.println(node.val);
+            node = node.next;
+        }
+    }
+
+
+    /**
+     *    1 2 3 4 2
+     *  x 1 2 3 4 2
+     *  l r
+     */
+    private static ListNode removeH(ListNode node, int v) {
+        ListNode d = new ListNode(-1, node);
+
+        ListNode l = d;
+        ListNode r = node;
+        while (r != null) {
+            if(r.val == v){
+                // 删除当前
+                r = r.next;
+                l.next = r;
+            }else {
+                l = r;
+                r= r.next;
+            }
+        }
+        return d.next;
+    }
+
+
 }

@@ -3,15 +3,15 @@ package nomouse.learn.algo.list;
 import nomouse.learn.algo.ListNode;
 
 /**
- * 合并连个有序链表
+ * 合并两个有序链表
  *
  * @author nomouse
  * @date 2021/11/18
  */
 public class MergeTwoList {
 
-    public ListNode mergeTwoLists(ListNode l1,
-                                  ListNode l2) {
+    public static ListNode mergeTwoLists(ListNode l1,
+        ListNode l2) {
         ListNode dummy = new ListNode();
 
         ListNode pre = dummy;
@@ -47,7 +47,31 @@ public class MergeTwoList {
             new ListNode(2,
                 new ListNode(4, null)));
 
-        System.out.println(new MergeTwoList().mergeTwoLists(node, node2));
+        System.out.println(mergeTwoLists(node, node2));
 
     }
+
+    /**
+     * l d>1>2>4 2>3>7 r
+     *
+     * @param node1
+     * @param node2
+     */
+    public ListNode mergeTwo(ListNode node1, ListNode node2) {
+
+        if (node1 == null) {
+            return node2;
+        }
+
+        if (node2 == null) {
+            return node1;
+        }
+
+        ListNode head = (node1.val <= node2.val ? node1 : node2);
+
+
+        return head;
+    }
+
+
 }
