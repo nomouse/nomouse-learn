@@ -17,23 +17,24 @@ import nomouse.biz.util.exception.BizException;
 @Slf4j
 public class TimeoutCompletableFutureDemo {
 
+    private static final int BATCH_TIMEOUT_SECOND = 5;
+
+    private static final int SINGLE_TIMEOUT_SECOND = 3;
+
     private static List<String> parallel(List<Long> idList) {
 
         CompletableFuture[] array = idList.stream()
             .map(id -> {
-                CompletableFuture<String> future =
-                    CompletableFutureUtils
-                        .orTimeout(CompletableFuture
-                                .supplyAsync(() -> singleHandle(id), CustomThreadPool.get()),
-                            3, TimeUnit.SECONDS)
-                        .whenComplete((m, e) -> {
-                            log.info(
-                                "|singleHandle|Single|Y||id={}|", id);
-                        })
-                        .exceptionally(e -> {
-                            log.error("|singleHandle|Single|Y||id={}|", id, e);
-                            return null;
-                        });
+                CompletableFuture<String> future = CompletableFutureUtils.orTimeout(
+                    CompletableFuture.supplyAsync(() -> singleHandle(id), CustomThreadPool.get()),
+                    SINGLE_TIMEOUT_SECOND, TimeUnit.SECONDS)
+                    .whenComplete((m, e) -> {
+                        log.info("|parallel|single|Y||id={}|", id);
+                    })
+                    .exceptionally(e -> {
+                        log.error("|parallel|single|N||id={}|", id, e);
+                        return null;
+                    });
                 return future;
             }).toArray(CompletableFuture[]::new);
 
@@ -42,7 +43,7 @@ public class TimeoutCompletableFutureDemo {
         try {
             // 全部线程返回后处理
             CompletableFuture.allOf(array)
-                .get(5, TimeUnit.SECONDS);
+                .get(BATCH_TIMEOUT_SECOND, TimeUnit.SECONDS);
 
             for (int i = 0; i < size; i++) {
                 CompletableFuture<String> future = array[i];
@@ -52,10 +53,10 @@ public class TimeoutCompletableFutureDemo {
                 }
             }
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            log.error("|getEmployeeDisplayMap|Batch|N|list={}", JSON.toJSONString(idList), e);
+            log.error("|parallel|batch|N|list={}", JSON.toJSONString(idList), e);
             throw new BizException(e.toString(), "并行处理异常");
         } catch (Exception e) {
-            log.error("|getEmployeeDisplayMap|Batch|N|list={}", JSON.toJSONString(idList), e);
+            log.error("|parallel|batch|N|list={}", JSON.toJSONString(idList), e);
             throw e;
         }
 

@@ -8,7 +8,7 @@ package nomouse.learn.algo.array;
  */
 public class BinarySearch {
 
-    public int binarySearch(int[] nums, int target) {
+    public static int binarySearch(int[] nums, int target) {
         // [-1,0,3,5,9,12]
         //
         if (nums == null || nums.length == 0) {
@@ -32,8 +32,31 @@ public class BinarySearch {
     }
 
     public static void main(String[] args) {
-        System.out.println(new BinarySearch()
-            .binarySearch(new int[] {-1, 0, 3, 5, 9, 12}, 9));
+        System.out.println(binarySearch2(new int[]{-1, 0, 3, 5, 9, 12}, 9));
+    }
+
+
+    private static int binarySearch2(int[] array, int target) {
+        if (array == null || array.length == 0) {
+            return -1;
+        }
+
+        return search(array, 0, array.length - 1, target);
+    }
+
+
+    private static int search(int[] array, int startIndex, int endIndex, int target) {
+        int midIndex = (startIndex + endIndex) / 2;
+        int midValue = array[midIndex];
+        if (midValue == target) {
+            return midIndex;
+        } else if (midValue > target) {
+            return search(array, startIndex, midIndex - 1, target);
+        } else {
+            return search(array, midIndex + 1, startIndex, target);
+        }
+
+
     }
 
 }

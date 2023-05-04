@@ -15,7 +15,7 @@ public class RemoveArrayElements {
      * @param nums
      * @param target
      */
-    public void removeTargetElement(int[] nums, int target) {
+    public static void removeRepeatElements(int[] nums, int target) {
         // [-1,0,3,9,5,9,12]
         // 双指针
         // 1. l = 0
@@ -45,7 +45,7 @@ public class RemoveArrayElements {
      *
      * @param nums
      */
-    public void removeRepeatElement(int[] nums) {
+    public static void removeRepeatElement(int[] nums) {
         // [-1,0,3,9,3,9,12]
 
         // 1.先遍历一遍找到所有重复字符，用set存储
@@ -78,12 +78,30 @@ public class RemoveArrayElements {
 
     public static void main(String[] args) {
         int[] nums = new int[]{-1, 9, 0, 3, 5, 9, 12};
-        RemoveArrayElements r = new RemoveArrayElements();
-        //        new RemoveArrayElements().removeTargetElement(nums, 9);
 
-        r.removeRepeatElement(nums);
+        removeRepeatElements2(nums, 9);
 
         System.out.println(Arrays.toString(nums));
     }
+
+
+    private static void removeRepeatElements2(int[] nums, int repeatValue) {
+        if (nums.length == 0) {
+            return;
+        }
+
+        int leftIndex = 0;
+        for (int rightIndex = 0; rightIndex < nums.length; rightIndex++) {
+            int rightValue = nums[rightIndex];
+            if (rightValue == repeatValue) {
+                // 需要移除，往后遍历
+            } else {
+                // 不需要移除，用当前值覆盖上次位置，标记后移
+                nums[leftIndex] = rightValue;
+                leftIndex = leftIndex + 1;
+            }
+        }
+    }
+
 
 }
